@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
+const GRAPHQL_URI = "https://users-messages-gql.herokuapp.com/graphql";
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const client = new ApolloClient({
+  uri: GRAPHQL_URI,
+  cache: new InMemoryCache()
+});
+
 root.render(
   <React.StrictMode>
+    <ApolloProvider client={client}>
     <App />
+    </ApolloProvider>
   </React.StrictMode>
 );
 
